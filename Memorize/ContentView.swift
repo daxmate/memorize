@@ -8,12 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var emojis: [String] = ["😈", "👹", "👺", "🤡", "💩", "👻", "💀", "☠️"]
+    let halloween: [String] = ["😈", "👹", "👺", "🤡", "💩", "👻", "💀", "☠️"]
+    let food: [String] = ["🍏", "🍎", "🍐", "🍊", "🍋", "🍋‍🟩", "🍌", "🍉", "🍇", "🫐"]
+    let vehicles: [String] = ["🚗", "🚕", "🚙", "🚌", "🚎", "🏎️", "🚓", "🚑", "🚒", "🚐", "🛻", "🚚", "🚛"]
+
+    @State var emojis: [String]
+
+    init() {
+        emojis = halloween
+    }
+
     @State var cardCount = 4
     var body: some View {
         VStack {
             cards
             buttons
+            themes
         }
     }
 
@@ -35,6 +45,31 @@ struct ContentView: View {
             }.disabled(cardCount == 1)
         }
         .padding()
+    }
+
+    var themes: some View {
+        HStack {
+            Button(action: {
+                emojis = halloween
+            }) {
+                Text("🎃")
+                    .scaleEffect(2)
+            }
+            Spacer()
+            Button(action: {
+                emojis = food
+            }) {
+                Text("🍎")
+                    .scaleEffect(2)
+            }
+            Spacer()
+            Button(action: {
+                emojis = vehicles
+            }) {
+                Text("🚗")
+                    .scaleEffect(2)
+            }
+        }.padding()
     }
 
     func handleCardCount(by offset: Int) {
