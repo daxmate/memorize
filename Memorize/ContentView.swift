@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     let halloween: [String] = ["😈", "👹", "👺", "🤡", "💩", "👻", "💀", "☠️"]
-    let food: [String] = ["🍏", "🍎", "🍐", "🍊", "🍋", "🍋‍🟩", "🍌", "🍉", "🍇", "🫐"]
+    let fruits: [String] = ["🍏", "🍎", "🍐", "🍊", "🍋", "🍋‍🟩", "🍌", "🍉", "🍇", "🫐"]
     let vehicles: [String] = ["🚗", "🚕", "🚙", "🚌", "🚎", "🏎️", "🚓", "🚑", "🚒", "🚐", "🛻", "🚚", "🚛"]
 
     @State var emojis: [String]
@@ -52,22 +52,31 @@ struct ContentView: View {
             Button(action: {
                 emojis = halloween.shuffled()
             }) {
-                Text("🎃")
-                    .scaleEffect(2)
+                VStack{
+                    Text("Halloween").padding()
+                    Text("🎃")
+                        .scaleEffect(2)
+                }
             }
             Spacer()
             Button(action: {
-                emojis = food.shuffled()
+                emojis = fruits.shuffled()
             }) {
-                Text("🍎")
-                    .scaleEffect(2)
+                VStack{
+                    Text("Fruits").padding()
+                    Text("🍎")
+                        .scaleEffect(2)
+                }
             }
             Spacer()
             Button(action: {
                 emojis = vehicles.shuffled()
             }) {
-                Text("🚗")
-                    .scaleEffect(2)
+                VStack{
+                    Text("Vehicals").padding()
+                    Text("🚗")
+                        .scaleEffect(2)
+                }
             }
         }.padding()
     }
