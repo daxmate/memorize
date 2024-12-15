@@ -22,12 +22,18 @@ struct ContentView: View {
     @State var cardCount = 15
     var body: some View {
         VStack {
+            gameTitle
             themes
             cards
             buttons
         }
     }
 
+    var gameTitle: some View{
+        Text("Memorize!")
+            .foregroundColor(.pink)
+            .font(.largeTitle)
+    }
     var buttons: some View {
         HStack {
             Button(action: {
@@ -90,7 +96,7 @@ struct ContentView: View {
         let cardPairs = Array(emojis[0 ..< cardCount] + emojis[0 ..< cardCount]).shuffled()
 
         return ScrollView {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 50, maximum: 100))]) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 50, maximum: 100))], spacing: 8) {
                 ForEach(0 ..< cardCount * 2, id: \.self) { index in
                     CardView(content: cardPairs[index])
                 }
@@ -105,7 +111,7 @@ struct CardView: View {
     @State var isFaceUp = false
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 12)
+            RoundedRectangle(cornerRadius: 4)
                 .stroke(.orange, lineWidth: 2)
                 .fill(isFaceUp ? .white : .orange)
                 .aspectRatio(2 / 3, contentMode: .fit)
