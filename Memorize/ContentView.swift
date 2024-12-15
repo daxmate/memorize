@@ -8,26 +8,47 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var emojis: [String] = ["😈", "👹", "👺", "🤡", "💩", "👻", "💀"]
+    @State var emojis: [String] = ["😈", "👹", "👺", "🤡", "💩", "👻", "💀", "☠️"]
+    @State var cardCount = 4
     var body: some View {
         VStack {
             cards
+            buttons
+        }
+    }
+
+    var buttons: some View {
+        HStack {
             Button(action: {
-                // 示例功能：在点击时添加一个新卡片
-                emojis.append("🎃")
+                handleCardCount(by: 1)
             }) {
                 Label("Add Cards", systemImage: "plus.square.fill.on.square.fill")
                     .labelStyle(.titleAndIcon)
-            }
-            .padding()
+            }.disabled(cardCount == emojis.count)
+            Spacer()
+
+            Button(action: {
+                handleCardCount(by: -1)
+            }) {
+                Label("Remove Cards", systemImage: "minus.square.fill")
+                    .labelStyle(.titleAndIcon)
+            }.disabled(cardCount == 1)
+        }
+        .padding()
+    }
+
+    func handleCardCount(by offset: Int) {
+        let newCount = cardCount + offset
+        if newCount > 0 && newCount <= emojis.count {
+            cardCount = newCount
         }
     }
 
     var cards: some View {
         ScrollView {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 80, maximum: 100))]) {
-                ForEach(emojis, id: \.self) { emoji in
-                    CardView(content: emoji)
+                ForEach(0 ..< cardCount, id: \.self) { index in
+                    CardView(content: emojis[index])
                 }
             }
             .padding()
