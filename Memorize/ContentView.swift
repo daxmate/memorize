@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    static let defaultEmojis: [Character] = Array("😈👹👺🤡💩👻💀☠️👽👾🤖🎃")
+    static let defaultEmojis: [Character] = Array("😈👹👺🤡💩👻💀☠️👽👾🤖🎃🧌🧙‍♀️🧜🏼")
     let halloween: [Character] = defaultEmojis
-    let fruits: [Character] = Array("🍏🍎🍐🍊🍋🍋‍🟩🍌🍉🍇🫐")
-    let vehicles: [Character] = Array("🚗🚕🚙🚌🚎🏎️🚓🚑🚒🚐🛻🚚🚛")
+    let fruits: [Character] = Array("🍏🍎🍐🍊🍋🍋‍🟩🍌🍉🍇🫐🍈🍒🍑🥭🍍🥥🥝🍅🍠🌽")
+    let vehicles: [Character] = Array("🚗🚕🚙🚌🚎🏎️🚓🚑🚒🚐🛻🚚🚛🚜🚲🛵🏍️🛺🚔🚍🚘🚖")
 
     @State var emojis: [Character] = defaultEmojis
 
@@ -19,12 +19,12 @@ struct ContentView: View {
 //        _emojis = State(initialValue: halloween)
 //    }
 
-    @State var cardCount = 4
+    @State var cardCount = 15
     var body: some View {
         VStack {
+            themes
             cards
             buttons
-            themes
         }
     }
 
@@ -90,7 +90,7 @@ struct ContentView: View {
         let cardPairs = Array(emojis[0 ..< cardCount] + emojis[0 ..< cardCount]).shuffled()
 
         return ScrollView {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 80, maximum: 100))]) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 50, maximum: 100))]) {
                 ForEach(0 ..< cardCount * 2, id: \.self) { index in
                     CardView(content: cardPairs[index])
                 }
