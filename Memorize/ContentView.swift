@@ -8,15 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
-    let halloween: [String] = ["😈", "👹", "👺", "🤡", "💩", "👻", "💀", "☠️"]
-    let fruits: [String] = ["🍏", "🍎", "🍐", "🍊", "🍋", "🍋‍🟩", "🍌", "🍉", "🍇", "🫐"]
-    let vehicles: [String] = ["🚗", "🚕", "🚙", "🚌", "🚎", "🏎️", "🚓", "🚑", "🚒", "🚐", "🛻", "🚚", "🚛"]
+    static let defaultEmojis: [String] = "😈👹👺🤡💩👻💀☠️👽👾🤖🎃".map { String($0) }
+    let halloween: [String] = defaultEmojis
+    let fruits: [String] = "🍏🍎🍐🍊🍋🍋‍🟩🍌🍉🍇🫐".map { String($0) }
+    let vehicles: [String] = "🚗🚕🚙🚌🚎🏎️🚓🚑🚒🚐🛻🚚🚛".map { String($0) }
 
-    @State var emojis: [String]
+    @State var emojis: [String] = defaultEmojis
 
-    init() {
-        emojis = halloween
-    }
+//    init() {
+//        _emojis = State(initialValue: halloween)
+//    }
 
     @State var cardCount = 4
     var body: some View {
@@ -44,7 +45,7 @@ struct ContentView: View {
                     .labelStyle(.titleAndIcon)
             }.disabled(cardCount == 1)
         }
-        .padding()
+        .padding(.leading).padding(.trailing)
     }
 
     var themes: some View {
@@ -52,30 +53,27 @@ struct ContentView: View {
             Button(action: {
                 emojis = halloween.shuffled()
             }) {
-                VStack{
-                    Text("Halloween").padding()
+                VStack {
+                    Text("Halloween")
                     Text("🎃")
-                        .scaleEffect(2)
                 }
             }
             Spacer()
             Button(action: {
                 emojis = fruits.shuffled()
             }) {
-                VStack{
-                    Text("Fruits").padding()
+                VStack {
+                    Text("Fruits")
                     Text("🍎")
-                        .scaleEffect(2)
                 }
             }
             Spacer()
             Button(action: {
                 emojis = vehicles.shuffled()
             }) {
-                VStack{
-                    Text("Vehicals").padding()
+                VStack {
+                    Text("Vehicals")
                     Text("🚗")
-                        .scaleEffect(2)
                 }
             }
         }.padding()
