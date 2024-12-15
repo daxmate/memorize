@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    static let defaultEmojis: [String] = "😈👹👺🤡💩👻💀☠️👽👾🤖🎃".map { String($0) }
-    let halloween: [String] = defaultEmojis
-    let fruits: [String] = "🍏🍎🍐🍊🍋🍋‍🟩🍌🍉🍇🫐".map { String($0) }
-    let vehicles: [String] = "🚗🚕🚙🚌🚎🏎️🚓🚑🚒🚐🛻🚚🚛".map { String($0) }
+    static let defaultEmojis: [Character] = Array("😈👹👺🤡💩👻💀☠️👽👾🤖🎃")
+    let halloween: [Character] = defaultEmojis
+    let fruits: [Character] = Array("🍏🍎🍐🍊🍋🍋‍🟩🍌🍉🍇🫐")
+    let vehicles: [Character] = Array("🚗🚕🚙🚌🚎🏎️🚓🚑🚒🚐🛻🚚🚛")
 
-    @State var emojis: [String] = defaultEmojis
+    @State var emojis: [Character] = defaultEmojis
 
 //    init() {
 //        _emojis = State(initialValue: halloween)
@@ -101,7 +101,7 @@ struct ContentView: View {
 }
 
 struct CardView: View {
-    let content: String
+    let content: Character
     @State var isFaceUp = false
     var body: some View {
         ZStack {
@@ -109,7 +109,7 @@ struct CardView: View {
                 .stroke(.orange, lineWidth: 2)
                 .fill(isFaceUp ? .white : .orange)
                 .aspectRatio(2 / 3, contentMode: .fit)
-            Text(content)
+            Text(String(content))
                 .font(.system(size: 50))
                 .bold()
                 .opacity(isFaceUp ? 1 : 0)
