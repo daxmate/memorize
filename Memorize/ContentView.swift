@@ -50,21 +50,21 @@ struct ContentView: View {
     var themes: some View {
         HStack {
             Button(action: {
-                emojis = halloween
+                emojis = halloween.shuffled()
             }) {
                 Text("🎃")
                     .scaleEffect(2)
             }
             Spacer()
             Button(action: {
-                emojis = food
+                emojis = food.shuffled()
             }) {
                 Text("🍎")
                     .scaleEffect(2)
             }
             Spacer()
             Button(action: {
-                emojis = vehicles
+                emojis = vehicles.shuffled()
             }) {
                 Text("🚗")
                     .scaleEffect(2)
@@ -80,10 +80,12 @@ struct ContentView: View {
     }
 
     var cards: some View {
-        ScrollView {
+        let cardPairs = Array(emojis[0 ..< cardCount] + emojis[0 ..< cardCount]).shuffled()
+
+        return ScrollView {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 80, maximum: 100))]) {
-                ForEach(0 ..< cardCount, id: \.self) { index in
-                    CardView(content: emojis[index])
+                ForEach(0 ..< cardCount * 2, id: \.self) { index in
+                    CardView(content: cardPairs[index])
                 }
             }
             .padding()
